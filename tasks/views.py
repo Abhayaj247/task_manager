@@ -43,7 +43,7 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'tasks/task_confrim_delete.html'
     success_url = reverse_lazy('task_list')
 
-# Optional: You could move this function to a utility module if you need to reuse it
+
 def send_invitation_email(request, task_id):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -57,11 +57,10 @@ def send_invitation_email(request, task_id):
                 task=task
             )
 
-            # Generate invitation link with token
             current_site = get_current_site(request)
             invite_url = f"{request.scheme}://{current_site.domain}/accounts/signup/?token={invitation.token}"
             
-            # Prepare email content
+         
             context = {
                 'task': task,
                 'invite_url': invite_url,
@@ -69,7 +68,7 @@ def send_invitation_email(request, task_id):
                 'protocol': 'https' if request.is_secure() else 'http'
             }
             
-            # Render email template
+           
             email_html = render_to_string('tasks/invitation_email.html', context)
             
             try:
@@ -88,7 +87,7 @@ def send_invitation_email(request, task_id):
             messages.error(request, "Please provide a valid email address.")
     
     return HttpResponseRedirect(reverse('task_list'))
-# Optional: View to handle user registration via invite
+
 from allauth.account.forms import SignupForm
 from django.shortcuts import redirect
 
@@ -96,5 +95,5 @@ def invite_user(request):
     if request.method == "POST":
         email = request.POST.get("email")
         send_invitation_email(request, email)
-        return redirect("task_list")  # Redirect to task list after sending invite
+        return redirect("task_list")  
     return render(request, "tasks/invite_user.html")

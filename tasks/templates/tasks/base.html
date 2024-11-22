@@ -10,7 +10,6 @@
             <a class="navbar-brand" href="{% url 'task_list' %}">Task Manager</a>
             {% if user.is_authenticated %}
                 <div class="navbar-nav">
-                    {% comment %} <a class="nav-link" href="{% url 'task_create' %}">New Task</a> {% endcomment %}
                     <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                 </div>
             {% else %}

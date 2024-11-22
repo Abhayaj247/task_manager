@@ -21,7 +21,6 @@ class GoogleOAuthSettings(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
-    # Ensure only one Google OAuth Settings record exists in the database
     def save(self, *args, **kwargs):
         if not self.pk and GoogleOAuthSettings.objects.exists():
             raise ValueError("Only one Google OAuth Settings entry is allowed.")
