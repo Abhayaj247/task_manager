@@ -1,0 +1,16 @@
+<!-- tasks/templates/tasks/invite_user.html -->
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Invite New User</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Send Invitation</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!-- tasks/templates/tasks/invitation_email.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Manager Invitation</title>
+    <style>
+        /* Your existing styles */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>You're Invited to Join Task Manager!</h1>
+        <p>Hello,</p>
+        <p>You've been invited by {{ invitation.invited_by.username }} to collaborate on a task in Task Manager.</p>
+        <p><strong>Task Title:</strong> {{ task.title }}</p>
+        <p><strong>Description:</strong> {{ task.description }}</p>
+        <p>Click the link below to sign up and join:</p>
+        <p>
+            <a href="{{ invite_url }}" target="_blank">
+                Sign up here
+            </a>
+        </p>
+        <p>This invitation link will expire in 7 days.</p>
+        <p>Thank you for joining!</p>
+        <hr>
+        <p><em>This is an automated email; please do not reply to this address.</em></p>
+    </div>
+</body>
+</html>

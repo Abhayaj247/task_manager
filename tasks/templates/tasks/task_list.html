@@ -1,0 +1,28 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+    <h2>My Tasks</h2>
+    {% if tasks %}
+        <div class="list-group">
+            {% for task in tasks %}
+                <div class="list-group-item">
+                    <h5 class="mb-1">{{ task.title }}</h5>
+                    <p class="mb-1">{{ task.description }}</p>
+                    <small class="text-muted">Created: {{ task.created_date }}</small>
+                    <div class="mt-2">
+                        <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        <form action="{% url 'send_invitation' task.pk %}" method="post" class="d-inline">
+                            {% csrf_token %}
+                            <input type="email" name="email" placeholder="Enter email" required class="form-control d-inline w-auto">
+                            <button type="submit" class="btn btn-sm btn-warning">Send Invitation</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No tasks yet.</p>
+    {% endif %}
+    <a href="{% url 'task_create' %}" class="btn btn-success mt-3">Add New Task</a>
+{% endblock %}
